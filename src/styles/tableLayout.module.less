@@ -1,0 +1,26 @@
+.panel {
+  height: calc(100vh - 190px);
+  box-sizing: border-box;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  .panelHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-shrink: 0;
+
+    .panelSearch {
+      display: flex;
+    }
+  }
+  .tableWrapper {
+    flex: 1;
+    overflow: hidden;
+  }
+  .tablePage {
+    padding-top: 12px;
+  }
+}

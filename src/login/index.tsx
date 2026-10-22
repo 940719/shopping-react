@@ -4,7 +4,7 @@ import { Button, Form, Input, message } from "antd";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { login, type LoginParams } from "@/api/login";
-import { setToken, setUserInfo } from "@/utils/auth";
+import { setToken } from "@/utils/auth";
 import styles from "./Login.module.less";
 type FieldType = {
   name?: string;
@@ -18,9 +18,9 @@ const Login: React.FC = () => {
     setLoading(true);
     try {
       const data = await login(values as LoginParams);
-      // 登录成功：保存 token 和用户信息（含角色、权限码，路由拦截要用）
+      // 登录成功：保存 token（后端目前只返回 token）
+      // 等后端返回 userInfo（含 roles/perms）后，在这里加 setUserInfo(data.userInfo)
       setToken(data.token);
-      setUserInfo(data.userInfo);
       message.success("登录成功");
       navigate("/"); // index 路由会自动重定向到 /users
     } catch {

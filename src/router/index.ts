@@ -1,14 +1,16 @@
-import { createElement } from "react";
+import { createElement, lazy } from "react";
 import { createBrowserRouter, Navigate, redirect } from "react-router";
 import type { AppRoute } from "./types";
 import Layout from "@/layout";
 import Login from "@/login";
-import Users from "@/pages/users";
+
 import Forbidden from "@/pages/Forbidden";
 import NotFound from "@/pages/NotFound";
 // hasAnyPerm
 import { getToken } from "@/utils/auth";
 
+const Users = lazy(() => import("@/pages/users"));
+const Category = lazy(() => import("@/pages/category"));
 // 鉴权 loader 工厂：每个路由用 meta 声明需要的权限，进入前统一拦截
 // （对应 Vue 里的 router.beforeEach 全局守卫）
 const authLoader =
@@ -46,6 +48,12 @@ export const routes: AppRoute[] = [
         element: createElement(Users),
         loader: authLoader({ perms: ["user"] }),
         meta: { title: "用户管理", requireAuth: true, perms: ["user"] },
+      },
+      {
+        path: "category",
+        element: createElement(Category),
+        loader: authLoader({ perms: ["category"] }),
+        meta: { title: "商品类型管理", requireAuth: true, perms: ["category"] },
       },
     ],
   },

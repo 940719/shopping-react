@@ -1,11 +1,7 @@
-import React from "react";
-
-const Users: React.FC = () => {
+export default function Users() {
   return (
     <>
       <div>Users</div>
     </>
   );
-};
-
-export default Users;
+}

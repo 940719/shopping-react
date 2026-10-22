@@ -19,10 +19,10 @@ export default defineConfig({
   },
   server: {
     proxy: {
+      // 匹配 /api 开头的请求，原样转发到后端（后端路由统一挂 /api 前缀）
       "/api": {
         target: "http://localhost:3001",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },
